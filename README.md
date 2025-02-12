@@ -63,7 +63,7 @@ Before running the pipeline, ensure you have the following installed:
 1. The **Extract, Transform, and Load (ETL) steps** are implemented as separate tasks in **Airflow**.
    - This structure allows for **task dependency management** within Airflow.
 2. After the **Extract & Transform** steps, the data is stored in the **file system (`/hcvt/import_open_meteo/fs`)**.
-   - This ensures **data separation**, enabling **backfilling** when needed.
+   - This ensures **data separation** per data layers (bronze, silver, gold), enabling **backfilling** when needed.
 
 ---
 
