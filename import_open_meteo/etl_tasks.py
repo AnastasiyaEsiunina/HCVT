@@ -1,4 +1,3 @@
-import os
 from datetime import datetime, timezone
 
 from import_open_meteo.processor.api_data_extractor import extract_weather_data
