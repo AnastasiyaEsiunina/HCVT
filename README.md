@@ -69,7 +69,7 @@ Before running the pipeline, ensure you have the following installed:
 
 ## **🛠️ Future Improvements**
 
-1. **Add unit tests** for data validation.
+1. **Add unit tests**.
 2. **Implement type annotations and linting** for better code quality.
 3. **Enhance logging** to improve debugging.
 4. **Secure credentials** (move them to environment variables or secrets manager).
