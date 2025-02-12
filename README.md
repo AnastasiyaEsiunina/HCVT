@@ -3,7 +3,10 @@
 This data pipeline imports weather data from the official **Open-Meteo API**.  
 It extracts **hourly weather data** (including temperature, wind speed, and total precipitation) for **New York City, Los Angeles, and San Francisco**.  
 The data is then saved into two separate tables with predefined column structures.
-
+   ```sh
+weather_forecast_metadata - API query metadata 
+hourly_weather_forecast - weather metrics 
+   ```
 The pipeline is scheduled to run **daily** using **Apache Airflow**.
 
 ---
