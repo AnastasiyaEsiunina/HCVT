@@ -21,21 +21,21 @@ dag = DAG(
 load_task = PythonOperator(
     task_id="load_task",
     python_callable=run,
-    op_kwargs={"task": "load", "date_from": "{{ ts }}"},  # Use keyword arguments
+    op_kwargs={"task": "load", "date_from": "{{ ts }}"},
     dag=dag,
 )
 
 transform_task = PythonOperator(
     task_id="transform_task",
     python_callable=run,
-    op_kwargs={"task": "transform", "date_from": "{{ ts }}"},  # Use keyword arguments
+    op_kwargs={"task": "transform", "date_from": "{{ ts }}"},
     dag=dag,
 )
 
 extract_task = PythonOperator(
     task_id="extract_task",
     python_callable=run,
-    op_kwargs={"task": "extract", "date_from": "{{ ts }}"},  # Use keyword arguments
+    op_kwargs={"task": "extract", "date_from": "{{ ts }}"},
     dag=dag,
 )
 
