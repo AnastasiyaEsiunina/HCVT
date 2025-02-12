@@ -31,7 +31,7 @@ Before running the pipeline, ensure you have the following installed:
 
 1. **Clone the repository:**
    ```sh
-   git clone <repo-url>
+   git clone git@github.com:AnastasiyaEsiunina/HCVT.git
    ```
 2. **Navigate to the project folder:**
    ```sh
