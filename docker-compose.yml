@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+
+  airflow:
+    image: apache/airflow:2.7.1
+    container_name: airflow_scheduler
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+      AIRFLOW__WEBSERVER__RBAC: "True"
+      AIRFLOW__CORE__FERNET_KEY: "ZMECEdG3M77AUXs8Yh1qPzvOGXLlFOPiLVNGlz2WyVY="
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      AIRFLOW__WEBSERVER__DEFAULT_USER_USERNAME: admin
+      AIRFLOW__WEBSERVER__DEFAULT_USER_PASSWORD: admin
+
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./import_open_meteo/requirements.txt:/requirements.txt
+      - ./import_dags:/opt/airflow/dags  # Moves import_open_meteo_dags
+      - ./import_open_meteo:/opt/airflow/dags/import_open_meteo  # Moves import_open_meteo scripts
+
+    entrypoint: /bin/bash -c "pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r /requirements.txt && airflow db init && airflow users create --username admin --password admin --firstname Air --lastname Flow --role Admin --email admin@example.com && airflow scheduler & airflow webserver"
+
+volumes:
+  postgres_data:
+  airflow_data:

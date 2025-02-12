@@ -1,0 +1,19 @@
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+
+# Ignore environment files
+.env
+.venv/
+.import_open_meteo_env
+
+# Ignore log files
+logs/
+*.log
+airflow.cfg
+webserver_config.py
+
+# Idea
+.idea
+*.imi
+

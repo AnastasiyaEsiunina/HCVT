@@ -1,0 +1,37 @@
+api_url:
+  https://api.open-meteo.com/v1/forecast
+
+fs_path_extracted:
+  ../fs/extracted/
+fs_path_transformed:
+  ../fs/transformed/
+
+cities:
+  "New York City":
+    lat: 40.7128
+    lon: -74.0060
+  "Los Angeles":
+    lat: 34.0522
+    lon: -118.2437
+  "San Francisco":
+    lat: 37.7749
+    lon: -122.4194
+
+additional_metrics:
+  - temperature
+  - wind speed
+  - total precipitation
+
+database:
+  user: airflow
+  password: airflow
+  host: localhost
+  port: 5432
+  dbname: open_meteo
+
+
+postgres_tables:
+  metadata:
+    name: weather_forecast_metadata
+  hourly:
+    name: hourly_weather_forecast
