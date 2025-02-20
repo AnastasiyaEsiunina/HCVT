@@ -14,12 +14,13 @@ logging.basicConfig(level=logging.INFO)
 API_URL = common.load_config()["api_url"]
 CITIES = common.load_config()["cities"]
 fs_path = common.load_config()["fs_path_extracted"]
+hourly_metrics = common.get_metrics()
 
 def _fetch_weather_data(city: str, lat: float, lon: float):
     params = {
         "latitude": lat,
         "longitude": lon,
-        "hourly": ["temperature_2m", "windspeed_10m", "precipitation", "relative_humidity_2m"],
+        "hourly": hourly_metrics,
         "timezone": "UTC"
     }
     response = requests.get(API_URL, params=params)
@@ -52,10 +53,7 @@ def extract_weather_data(date_from: str):
                 "latitude": lat,
                 "longitude": lon,
                 "time": hourly_data["time"][i],
-                "temperature_2m": hourly_data["temperature_2m"][i],
-                "windspeed_10m": hourly_data["windspeed_10m"][i],
-                "precipitation": hourly_data["precipitation"][i],
-                "relative_humidity_2m": hourly_data["relative_humidity_2m"][i]
+                **{metric: hourly_data[metric][i] for metric in hourly_metrics}
             })
     _save_to_orc(date_from, weather_records)
     logging.info("✅ ORC raw data file saved successfully.")

@@ -33,7 +33,9 @@ def _save_transformed_metadata(pd_raw_df: pd.DataFrame):
 
 
 def _save_transformed_hourly_data(pd_raw_df: pd.DataFrame):
-    selected_df = pd_raw_df[["request_id", "time", "temperature_2m", "windspeed_10m", "precipitation", "relative_humidity_2m"]]
+    hourly_metrics = ["request_id", "time"] + common.get_metrics()
+    logging.info(hourly_metrics)
+    selected_df = pd_raw_df[hourly_metrics]
     file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), fs_path_transformed + f"{hourly_table}.orc")
 
     if os.path.exists(file_path):

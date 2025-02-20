@@ -17,10 +17,11 @@ cities:
     lat: 37.7749
     lon: -122.4194
 
-additional_metrics:
-  - temperature
-  - wind speed
-  - total precipitation
+hourly_metrics:
+  - temperature_2m
+  - windspeed_10m
+  - precipitation
+  - relative_humidity_2m
 
 database:
   user: airflow
