@@ -11,7 +11,6 @@ def load_config():
 def get_db_engine():
     config = load_config()["database"]
     db_url = f"postgresql://{config['user']}:{config['password']}@{config['host']}:{config['port']}/{config['dbname']}"
-
     engine = create_engine(db_url)
 
     return engine

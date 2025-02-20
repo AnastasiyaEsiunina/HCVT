@@ -1,7 +1,9 @@
+import logging
 import os
 import pandas as pd
 from . import common
 
+logging.basicConfig(level=logging.INFO)
 config = common.load_config()
 
 fs_path_transformed = config["fs_path_transformed"]
@@ -12,17 +14,17 @@ def _insert_orc_to_postgres(orc_file, table_name):
     df = pd.read_orc(orc_file)
 
     if df.empty:
-        print("ORC file is empty. No data to insert.")
+        logging.info("ORC file is empty. No data to insert.")
         return
 
     engine = common.get_db_engine()
 
     try:
         df.to_sql(table_name, con=engine, if_exists="append", index=False)
-        print(f"✅ Successfully inserted {len(df)} rows into {table_name}")
+        logging.info(f"✅ Successfully inserted rows into {table_name}")
 
     except Exception as e:
-        print(f"Error inserting data: {e}")
+        logging.error(f"Error inserting data: {e}")
 
 def load_to_postgres():
     for table in tables.values():

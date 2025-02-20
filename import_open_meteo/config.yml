@@ -25,7 +25,7 @@ additional_metrics:
 database:
   user: airflow
   password: airflow
-  host: localhost
+  host: postgres
   port: 5432
   dbname: open_meteo
 

@@ -39,4 +39,4 @@ extract_task = PythonOperator(
     dag=dag,
 )
 
-extract_task >> load_task >> transform_task
+extract_task >> transform_task >> load_task
